@@ -1,23 +1,9 @@
 #!/usr/bin/env bash
 PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
 export PATH
-#=================================================================#
-#   System Required:  CentOS 6+, Debian 7+, Ubuntu 12+            #
-#   Description: One click Install Shadowsocks-Python server      #
-#   Author: Teddysun <i@teddysun.com>                             #
-#   Thanks: @clowwindy <https://twitter.com/clowwindy>            #
-#   Intro:  https://teddysun.com/342.html                         #
-#=================================================================#
+
 
 clear
-echo
-echo "#############################################################"
-echo "# One click Install Shadowsocks-Python server               #"
-echo "# Intro: https://teddysun.com/342.html                      #"
-echo "# Author: Teddysun <i@teddysun.com>                         #"
-echo "# Github: https://github.com/shadowsocks/shadowsocks        #"
-echo "#############################################################"
-echo
 
 #Current folder
 cur_dir=`pwd`
@@ -57,7 +43,7 @@ check_sys(){
         systemPackage="apt"
     elif cat /etc/issue | grep -Eqi "centos|red hat|redhat"; then
         release="centos"
-        systemPackage="yum"
+     	   systemPackage="yum"
     elif cat /proc/version | grep -Eqi "debian"; then
         release="debian"
         systemPackage="apt"
@@ -141,8 +127,8 @@ pre_install(){
     fi
     # Set shadowsocks config password
     echo "Please input password for shadowsocks-python:"
-    read -p "(Default password: teddysun.com):" shadowsockspwd
-    [ -z "${shadowsockspwd}" ] && shadowsockspwd="teddysun.com"
+    read -p "(Default password: password):" shadowsockspwd
+    [ -z "${shadowsockspwd}" ] && shadowsockspwd="password"
     echo
     echo "---------------------------"
     echo "password = ${shadowsockspwd}"
@@ -152,8 +138,8 @@ pre_install(){
     while true
     do
     echo -e "Please input port for shadowsocks-python [1-65535]:"
-    read -p "(Default port: 8989):" shadowsocksport
-    [ -z "$shadowsocksport" ] && shadowsocksport="8989"
+    read -p "(Default port: 2580):" shadowsocksport
+    [ -z "$shadowsocksport" ] && shadowsocksport="2580"
     expr ${shadowsocksport} + 0 &>/dev/null
     if [ $? -eq 0 ]; then
         if [ ${shadowsocksport} -ge 1 ] && [ ${shadowsocksport} -le 65535 ]; then
@@ -304,7 +290,7 @@ install(){
         /etc/init.d/shadowsocks start
     else
         echo
-        echo "Shadowsocks install failed! please visit https://teddysun.com/342.html and contact."
+        echo "Shadowsocks install failed."
         install_cleanup
         exit 1
     fi
@@ -319,7 +305,6 @@ install(){
     echo -e "Your Local Port: \033[41;37m 1080 \033[0m"
     echo -e "Your Encryption Method: \033[41;37m aes-256-cfb \033[0m"
     echo
-    echo "Welcome to visit:https://teddysun.com/342.html"
     echo "Enjoy it!"
     echo
 }
