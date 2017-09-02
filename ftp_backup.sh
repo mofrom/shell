@@ -2,7 +2,6 @@
 PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin
 export PATH
 #==============================================
-#www.9yun.org备份数据相关设置
 #==============================================
 
 #数据库用户名
