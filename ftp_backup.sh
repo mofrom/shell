@@ -40,19 +40,19 @@ ftppassword=''
 
 #正式备份数据库
 for table in $dbname; do
-source=`mysqldump -u ${dbuser} -p${dbpasswd} ${table}> ${datapath}/${backtime}.sql` 2>> ${datapath}/mysqllog.log;
-#备份成功以下操作
-if [ "$?" == 0 ];then
-	cd $datapath
-	#为节约硬盘空间，将数据库压缩
-	tar jcf ${table}${backtime}.tar.bz2 ${backtime}.sql > /dev/null
-	#同时压缩打包网站程序
-	tar jcf ${table}web${backtime}.tar.bz2 ${webbakpath}/ > /dev/null
-	#删除原始文件，只留压缩后文件
-	rm -f ${datapath}/${backtime}.sql
-	#删除七天前备份，也就是只保存7天内的备份
-	find $datapath -name "*.tar.bz2" -type f -mtime +7 -exec rm -rf {} \; > /dev/null 2>&1
-fi
+  source=`mysqldump -u ${dbuser} -p${dbpasswd} ${table}> ${datapath}/${backtime}.sql` 2>> ${datapath}/mysqllog.log;
+  #备份成功以下操作
+  if [ "$?" == 0 ];then
+    cd $datapath
+    #为节约硬盘空间，将数据库压缩
+    tar jcf ${table}${backtime}.tar.bz2 ${backtime}.sql > /dev/null
+    #同时压缩打包网站程序
+    tar jcf ${table}web${backtime}.tar.bz2 ${webbakpath}/ > /dev/null
+    #删除原始文件，只留压缩后文件
+    rm -f ${datapath}/${backtime}.sql
+    #删除七天前备份，也就是只保存7天内的备份
+    find $datapath -name "*.tar.bz2" -type f -mtime +7 -exec rm -rf {} \; > /dev/null 2>&1
+  fi
 done
 
 #==============================================
