@@ -54,11 +54,11 @@ echo --------------------------------------------------------------------------
 
 if ps -elf |grep xinet |grep -v "grep xinet";then
 
-echo "xinetd 服务正在运行，请检查是否可以把xinnetd服务关闭"
+  echo "xinetd 服务正在运行，请检查是否可以把xinnetd服务关闭"
 
 else
 
-echo "xinetd 服务未开启"
+  echo "xinetd 服务未开启"
 
 fi
 
@@ -74,11 +74,11 @@ echo  "查看是否开启了ssh服务"
 
 if service sshd status | grep -E "listening on|active \(running\)"; then
 
-echo "SSH服务已开启"
+  echo "SSH服务已开启"
 
 else
 
-echo "SSH服务未开启"
+  echo "SSH服务未开启"
 
 fi
 
@@ -88,11 +88,11 @@ echo "查看是否开启了TELNET服务"
 
 if more /etc/xinetd.d/telnetd 2>&1|grep -E "disable=no"; then
 
-echo  "TELNET服务已开启 "
+  echo  "TELNET服务已开启 "
 
 else
 
-echo  "TELNET服务未开启 "
+  echo  "TELNET服务未开启 "
 
 fi
 
@@ -102,11 +102,11 @@ echo  "查看系统SSH远程访问设置策略(host.deny拒绝列表)"
 
 if more /etc/hosts.deny | grep -E "sshd: ";more /etc/hosts.deny | grep -E "sshd"; then
 
-echo  "远程访问策略已设置 "
+  echo  "远程访问策略已设置 "
 
 else
 
-echo  "远程访问策略未设置 "
+  echo  "远程访问策略未设置 "
 
 fi
 
@@ -116,11 +116,11 @@ echo  "查看系统SSH远程访问设置策略(hosts.allow允许列表)"
 
 if more /etc/hosts.allow | grep -E "sshd: ";more /etc/hosts.allow | grep -E "sshd"; then
 
-echo  "远程访问策略已设置 "
+  echo  "远程访问策略已设置 "
 
 else
 
-echo  "远程访问策略未设置 "
+  echo  "远程访问策略未设置 "
 
 fi
 
@@ -132,11 +132,11 @@ echo "查看shell是否设置超时锁定策略"
 
 if more /etc/profile | grep -E "TIMEOUT= "; then
 
-echo  "系统设置了超时锁定策略 "
+  echo  "系统设置了超时锁定策略 "
 
 else
 
-echo  "未设置超时锁定策略 "
+  echo  "未设置超时锁定策略 "
 
 fi
 
@@ -146,11 +146,11 @@ echo "查看syslog日志审计服务是否开启"
 
 if service syslog status | egrep " active \(running";then
 
-echo "syslog服务已开启"
+  echo "syslog服务已开启"
 
 else
 
-echo "syslog服务未开启，建议通过service syslog start开启日志审计功能"
+  echo "syslog服务未开启，建议通过service syslog start开启日志审计功能"
 
 fi
 
@@ -160,11 +160,11 @@ echo "查看syslog日志是否开启外发"
 
 if more /etc/rsyslog.conf | egrep "@...\.|@..\.|@.\.|\*.\* @...\.|\*\.\* @..\.|\*\.\* @.\.";then
 
-echo "客户端syslog日志已开启外发"
+  echo "客户端syslog日志已开启外发"
 
 else
 
-echo "客户端syslog日志未开启外发"
+  echo "客户端syslog日志未开启外发"
 
 fi
 
@@ -228,17 +228,17 @@ echo "-----------------------检查系统是否存在PHP脚本后门------------
 
 if find / -type f -name *.php | xargs egrep -l "mysql_query\($query, $dbconn\)|专用网马|udf.dll|class PHPzip\{|ZIP压缩程序 荒野无灯修改版|$writabledb|AnonymousUserName|eval\(|Root_CSS\(\)|黑狼PHP木马|eval\(gzuncompress\(base64_decode|if\(empty\($_SESSION|$shellname|$work_dir |PHP木马|Array\("$filename"| eval\($_POST\[|class packdir|disk_total_space|wscript.shell|cmd.exe|shell.application|documents and settings|system32|serv-u|提权|phpspy|后门" |sort -n|uniq -c |sort -rn 1>/dev/null 2>&1;then
 
-echo "检测到PHP脚本后门"
+  echo "检测到PHP脚本后门"
 
-find / -type f -name *.php | xargs egrep -l "mysql_query\($query, $dbconn\)|专用网马|udf.dll|class PHPzip\{|ZIP压缩程序 荒野无灯修改版|$writabledb|AnonymousUserName|eval\(|Root_CSS\(\)|黑狼PHP木马|eval\(gzuncompress\(base64_decode|if\(empty\($_SESSION|$shellname|$work_dir |PHP木马|Array\("$filename"| eval\($_POST\[|class packdir|disk_total_space|wscript.shell|cmd.exe|shell.application|documents and settings|system32|serv-u|提权|phpspy|后门" |sort -n|uniq -c |sort -rn
+  find / -type f -name *.php | xargs egrep -l "mysql_query\($query, $dbconn\)|专用网马|udf.dll|class PHPzip\{|ZIP压缩程序 荒野无灯修改版|$writabledb|AnonymousUserName|eval\(|Root_CSS\(\)|黑狼PHP木马|eval\(gzuncompress\(base64_decode|if\(empty\($_SESSION|$shellname|$work_dir |PHP木马|Array\("$filename"| eval\($_POST\[|class packdir|disk_total_space|wscript.shell|cmd.exe|shell.application|documents and settings|system32|serv-u|提权|phpspy|后门" |sort -n|uniq -c |sort -rn
 
-find / -type f -name *.php | xargs egrep -l "mysql_query\($query, $dbconn\)|专用网马|udf.dll|class PHPzip\{|ZIP压缩程序 荒野无灯修改版|$writabledb|AnonymousUserName|eval\(|Root_CSS\(\)|黑狼PHP木马|eval\(gzuncompress\(base64_decode|if\(empty\($_SESSION|$shellname|$work_dir |PHP木马|Array\("$filename"| eval\($_POST\[|class packdir|disk_total_space|wscript.shell|cmd.exe|shell.application|documents and settings|system32|serv-u|提权|phpspy|后门" |sort -n|uniq -c |sort -rn |awk '{print $2}' | xargs -I{} cp {} /tmp/
+  find / -type f -name *.php | xargs egrep -l "mysql_query\($query, $dbconn\)|专用网马|udf.dll|class PHPzip\{|ZIP压缩程序 荒野无灯修改版|$writabledb|AnonymousUserName|eval\(|Root_CSS\(\)|黑狼PHP木马|eval\(gzuncompress\(base64_decode|if\(empty\($_SESSION|$shellname|$work_dir |PHP木马|Array\("$filename"| eval\($_POST\[|class packdir|disk_total_space|wscript.shell|cmd.exe|shell.application|documents and settings|system32|serv-u|提权|phpspy|后门" |sort -n|uniq -c |sort -rn |awk '{print $2}' | xargs -I{} cp {} /tmp/
 
-echo "后门样本已拷贝到/tmp/目录"
+  echo "后门样本已拷贝到/tmp/目录"
 
 else
 
-echo "未检测到PHP脚本后门"
+  echo "未检测到PHP脚本后门"
 
 fi
 
@@ -248,7 +248,7 @@ echo "-----------------------检查系统是否存在JSP脚本后门------------
 
 find / -type f -name *.jsp | xargs egrep -l "InputStreamReader\(this.is\)|W_SESSION_ATTRIBUTE|strFileManag|getHostAddress|wscript.shell|gethostbyname|cmd.exe|documents and settings|system32|serv-u|提权|jspspy|后门" |sort -n|uniq -c |sort -rn 2>&1
 
-find / -type f -name *.jsp | xargs egrep -l "InputStreamReader\(this.is\)|W_SESSION_ATTRIBUTE|strFileManag|getHostAddress|wscript.shell|gethostbyname|cmd.exe|documents and settings|system32|serv-u|提权|jspspy|后门" |sort -n|uniq -c |sort -rn| awk '{print $2}' | xargs -I{} cp {} /tmp/  2>&1 
+find / -type f -name *.jsp | xargs egrep -l "InputStreamReader\(this.is\)|W_SESSION_ATTRIBUTE|strFileManag|getHostAddress|wscript.shell|gethostbyname|cmd.exe|documents and settings|system32|serv-u|提权|jspspy|后门" |sort -n|uniq -c |sort -rn| awk '{print $2}' | xargs -I{} cp {} /tmp/  2>&1
 
 echo ------------------------------------------------------------------------
 
@@ -256,17 +256,17 @@ echo "----------------------检查系统是否存在HTML恶意代码------------
 
 if find / -type f -name *.html | xargs egrep -l "WriteData|svchost.exe|DropPath|wsh.Run|WindowBomb|a1.createInstance|CurrentVersion|myEncString|DropFileName|a = prototype;|204.351.440.495.232.315.444.550.64.330" 1>/dev/null 2>&1;then
 
-echo "发现HTML恶意代码"
+  echo "发现HTML恶意代码"
 
-find / -type f -name *.html | xargs egrep -l "WriteData|svchost.exe|DropPath|wsh.Run|WindowBomb|a1.createInstance|CurrentVersion|myEncString|DropFileName|a = prototype;|204.351.440.495.232.315.444.550.64.330" |sort -n|uniq -c |sort -rn
+  find / -type f -name *.html | xargs egrep -l "WriteData|svchost.exe|DropPath|wsh.Run|WindowBomb|a1.createInstance|CurrentVersion|myEncString|DropFileName|a = prototype;|204.351.440.495.232.315.444.550.64.330" |sort -n|uniq -c |sort -rn
 
-find / -type f -name *.html | xargs egrep -l "WriteData|svchost.exe|DropPath|wsh.Run|WindowBomb|a1.createInstance|CurrentVersion|myEncString|DropFileName|a = prototype;|204.351.440.495.232.315.444.550.64.330" |sort -n|uniq -c |sort -rn| awk '{print $2}' | xargs -I{} cp {} /tmp/
+  find / -type f -name *.html | xargs egrep -l "WriteData|svchost.exe|DropPath|wsh.Run|WindowBomb|a1.createInstance|CurrentVersion|myEncString|DropFileName|a = prototype;|204.351.440.495.232.315.444.550.64.330" |sort -n|uniq -c |sort -rn| awk '{print $2}' | xargs -I{} cp {} /tmp/
 
-echo "后门样本已拷贝到/tmp/目录"
+  echo "后门样本已拷贝到/tmp/目录"
 
 else
 
-echo "未检测到HTML恶意代码"
+  echo "未检测到HTML恶意代码"
 
 fi
 
@@ -274,17 +274,17 @@ echo "----------------------检查系统是否存在perl恶意程序------------
 
 if find / -type f -name *.pl | xargs egrep -l "SHELLPASSWORD|shcmd|backdoor|setsockopt|IO::Socket::INET;" 1>/dev/null 2>&1;then
 
-echo "发现perl恶意程序"
+  echo "发现perl恶意程序"
 
-find / -type f -name *.pl | xargs egrep -l "SHELLPASSWORD|shcmd|backdoor|setsockopt|IO::Socket::INET;"|sort -n|uniq -c |sort -rn
+  find / -type f -name *.pl | xargs egrep -l "SHELLPASSWORD|shcmd|backdoor|setsockopt|IO::Socket::INET;"|sort -n|uniq -c |sort -rn
 
-find / -type f -name *.pl | xargs egrep -l "SHELLPASSWORD|shcmd|backdoor|setsockopt|IO::Socket::INET;"|sort -n|uniq -c |sort -rn| awk '{print $2}' | xargs -I{} cp {} /tmp/
+  find / -type f -name *.pl | xargs egrep -l "SHELLPASSWORD|shcmd|backdoor|setsockopt|IO::Socket::INET;"|sort -n|uniq -c |sort -rn| awk '{print $2}' | xargs -I{} cp {} /tmp/
 
-echo "可疑样本已拷贝到/tmp/目录"
+  echo "可疑样本已拷贝到/tmp/目录"
 
 else
 
-echo "未检测到perl恶意程序"
+  echo "未检测到perl恶意程序"
 
 fi
 
@@ -304,15 +304,15 @@ echo ------------------------------------------------------------------------
 
 echo "检查网络连接和监听端口"
 
-netstat -an 
+netstat -an
 
 echo "--------------------------路由表、网络连接、接口信息--------------"
 
-netstat -rn 
+netstat -rn
 
 echo "------------------------查看网卡详细信息--------------------------"
 
-ifconfig -a 
+ifconfig -a
 
 echo ------------------------------------------------------------------------
 
@@ -360,21 +360,21 @@ log2=/var/log/messages
 
 if [ -e "$log" ]; then
 
-echo  "syslog日志文件存在！ "
+  echo  "syslog日志文件存在！ "
 
 else
 
-echo  "/var/log/syslog日志文件不存在！ "
+  echo  "/var/log/syslog日志文件不存在！ "
 
 fi
 
 if [ -e "$log2" ]; then
 
-echo  "/var/log/messages日志文件存在！ "
+  echo  "/var/log/messages日志文件存在！ "
 
 else
 
-echo  "/var/log/messages日志文件不存在！ "
+  echo  "/var/log/messages日志文件不存在！ "
 
 fi
 
@@ -390,27 +390,27 @@ echo "第二次重复检查时，则会对MD5DB中的MD5值进行匹配，来判
 
 file="/etc/md5db"
 
-if [ -e "$file" ]; then md5sum -c /etc/md5db 2>&1; 
+if [ -e "$file" ]; then md5sum -c /etc/md5db 2>&1;
 
-else 
+else
 
-md5sum /etc/passwd >>/etc/md5db
+  md5sum /etc/passwd >>/etc/md5db
 
-md5sum /etc/shadow >>/etc/md5db
+  md5sum /etc/shadow >>/etc/md5db
 
-md5sum /etc/group >>/etc/md5db
+  md5sum /etc/group >>/etc/md5db
 
-md5sum /usr/bin/passwd >>/etc/md5db
+  md5sum /usr/bin/passwd >>/etc/md5db
 
-md5sum /sbin/portmap>>/etc/md5db
+  md5sum /sbin/portmap>>/etc/md5db
 
-md5sum /bin/login >>/etc/md5db
+  md5sum /bin/login >>/etc/md5db
 
-md5sum /bin/ls >>/etc/md5db
+  md5sum /bin/ls >>/etc/md5db
 
-md5sum /bin/ps >>/etc/md5db
+  md5sum /bin/ps >>/etc/md5db
 
-md5sum /usr/bin/top >>/etc/md5db;
+  md5sum /usr/bin/top >>/etc/md5db;
 
 fi
 
